@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
     <link rel="stylesheet" href="index.css">
 </head>
@@ -109,6 +110,11 @@
         pointDisplay[i].onclick = function(){
             context.lineWidth = pointDisplay[i].children[0].offsetWidth;
         };
+    }
+
+    window.onresize = function () {
+        canvas.width = document.documentElement.offsetWidth-166;
+        canvas.height = document.documentElement.offsetHeight-58;
     }
 </script>
 </body>

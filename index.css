@@ -1,0 +1,134 @@
+.clearfix::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+body, ul, li{
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    border: 1px solid transparent;  //自定义边框
+outline: none;    //消除默认点击蓝色边框效果
+}
+li {
+    list-style: none;
+}
+
+body {
+    /*background-color: #0c8077;*/
+    height: 100vh;
+}
+
+.wrapper{
+    position: relative;
+}
+
+#canvas {
+    float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    border: 1px solid #0c8077;
+}
+
+
+
+.tool {
+    /*width: 150px;*/
+    /*border: 1px solid green;*/
+    float: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 45px;
+}
+
+#eraser {
+    margin:20px 0;
+    height: 50px;
+    width: 50px;
+}
+
+.tool .color div{
+    border:1px solid #9C9C9C;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background-color: #ffffff;
+    margin: 15px 0;
+    cursor: pointer;
+}
+
+.tool .pointWidth{
+    width: 20px;
+}
+
+.tool .pointWidth .displayPointer{
+    /*border: 1px solid green;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.tool .pointWidth .displayPointerNum{
+    margin-bottom: 10px;
+}
+
+.tool .pointWidth .displayPointerWidth1{
+    display: block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #000000;
+}
+
+.tool .pointWidth .displayPointerWidth2{
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #000000;
+}
+
+.tool .pointWidth .displayPointerWidth3{
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #000000;
+}
+
+.tool .pointWidth .displayPointerWidth4{
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #000000;
+}
+
+#red {
+    background-color: red;
+}
+
+#blue {
+    background-color: blue;
+}
+
+#black {
+    background-color: black;
+}
+
+#yellow {
+    background-color: yellow;
+}
+
+#pink {
+    background-color: pink;
+}
+
