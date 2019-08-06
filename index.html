@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="wrapper clearfix">
+        <canvas id="canvas" height="600" width="1200"></canvas>
+        <div class="tool">
+            <button id="eraser">橡皮擦</button>
+            <div class="pointWidth">
+                <div class="displayPointer">
+                    <span class="displayPointerWidth1"></span>
+                    <span class="displayPointerNum">1</span>
+                </div>
+                <div class="displayPointer">
+                    <span class="displayPointerWidth2"></span>
+                    <span class="displayPointerNum">2</span>
+                </div>
+                <div class="displayPointer">
+                    <span class="displayPointerWidth3"></span>
+                    <span class="displayPointerNum">3</span>
+                </div>
+                <div class="displayPointer">
+                    <span class="displayPointerWidth4"></span>
+                    <span class="displayPointerNum">4</span>
+                </div>
+            </div>
+            <ul class="color">
+                <li><div id="red"></div></li>
+                <li><div id="blue"></div></li>
+                <li><div id="yellow"></div></li>
+                <li><div id="pink"></div></li>
+                <li><div id="black"></div></li>
+            </ul>
+        </div>
+
+    </div>
+<script>
+    let canvas = document.getElementById('canvas');
+    let eraser = document.getElementById('eraser');
+    let context = canvas.getContext('2d');
+    let tool = document.getElementById('tool');
+    let using = false;
+    let usePen = true;
+    let lastPoint = {
+        x:undefined,
+        y:undefined
+    };
+
+    canvas.onmousedown = function (event) {
+        // console.log('摁下鼠标');
+        using = true;
+        let x = event.offsetX;
+        let y = event.offsetY;
+        lastPoint = {x:x, y:y}
+    };
+
+    canvas.onmousemove = function (event, penlinewidth) {
+        let x = event.offsetX;
+        let y = event.offsetY;
+        let newPoint = {x:x, y:y};
+        if(usePen && using){
+            context.beginPath();
+            context.moveTo(lastPoint.x,lastPoint.y);
+            context.lineTo(newPoint.x,newPoint.y);
+            context.lineJoin = 'round';
+            context.lineCap = 'round';
+            context.stroke();
+            context.closePath();
+            lastPoint = newPoint;
+        }
+
+        if(!usePen && using){
+            context.clearRect(newPoint.x, newPoint.y, 20, 20);
+        }
+    };
+
+    canvas.onmouseup = function (event) {
+        // console.log('松开鼠标')
+        using = false;
+    };
+
+    eraser.onclick = function () {
+        usePen = !usePen;
+        if(usePen){
+            eraser.innerText = "橡皮擦";
+        }else {
+            eraser.innerText = "画笔";
+        }
+    };
+
+    let buttons = document.getElementsByClassName("color")[0].getElementsByTagName("div");
+
+    let pointDisplay = document.getElementsByClassName("displayPointer");
+
+
+    for(let i = 0; i < buttons.length; i++){
+        console.log(buttons[i]);
+        buttons[i].onclick = function(){
+            context.strokeStyle = buttons[i].id;
+        };
+    }
+
+    for(let i = 0; i < pointDisplay.length; i++){
+        console.log(pointDisplay[i].children[0].offsetWidth);
+        pointDisplay[i].onclick = function(){
+            context.lineWidth = pointDisplay[i].children[0].offsetWidth;
+        };
+    }
+</script>
+</body>
+</html>
